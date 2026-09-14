@@ -4,7 +4,7 @@ import React, { useState, useMemo } from 'react';
 import { FOOD_DATA } from '../data';
 
 export default function Home() {
-  const [selectedChain, setSelectedChain] = useState<'all' | 'mcdonalds' | 'kfc' | 'burgerking'>('all');
+  const [selectedChain, setSelectedChain] = useState<'all' | 'mcdonalds' | 'kfc' | 'burgerking' | 'subway'>('all');
   const [sortBy, setSortBy] = useState<'ratio' | 'protein' | 'calories'>('ratio');
   const [under500Kcal, setUnder500Kcal] = useState<boolean>(false);
 
@@ -32,6 +32,7 @@ export default function Home() {
       case 'mcdonalds': return "McDonald's";
       case 'kfc': return 'KFC';
       case 'burgerking': return 'Burger King';
+      case 'subway': return 'Subway';
       default: return chain;
     }
   };
@@ -51,6 +52,7 @@ export default function Home() {
           { id: 'mcdonalds', label: "McDonald's" },
           { id: 'kfc', label: 'KFC' },
           { id: 'burgerking', label: 'Burger King' },
+          { id: 'subway', label: 'Subway' },
         ].map((chain) => (
           <button
             key={chain.id}
