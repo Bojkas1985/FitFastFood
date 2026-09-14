@@ -4,7 +4,7 @@ import React, { useState, useMemo } from 'react';
 import { FOOD_DATA } from '../data';
 
 export default function Home() {
-  const [selectedChain, setSelectedChain] = useState<'all' | 'mcdonalds' | 'kfc'>('all');
+  const [selectedChain, setSelectedChain] = useState<'all' | 'mcdonalds' | 'kfc' | 'burgerking'>('all');
   const [sortBy, setSortBy] = useState<'ratio' | 'protein' | 'calories'>('ratio');
   const [under500Kcal, setUnder500Kcal] = useState<boolean>(false);
 
