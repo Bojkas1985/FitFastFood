@@ -27,6 +27,15 @@ export default function Home() {
       });
   }, [selectedChain, sortBy, under500Kcal]);
 
+  const getChainName = (chain: string) => {
+    switch (chain) {
+      case 'mcdonalds': return "McDonald's";
+      case 'kfc': return 'KFC';
+      case 'burgerking': return 'Burger King';
+      default: return chain;
+    }
+  };
+
   return (
     <main className="min-h-screen bg-slate-950 text-slate-100 p-4 max-w-md mx-auto pb-12">
       {/* Header */}
@@ -36,16 +45,17 @@ export default function Home() {
       </header>
 
       {/* Výběr Řetězce */}
-      <div className="flex gap-2 mb-4">
+      <div className="flex gap-1.5 mb-4 overflow-x-auto pb-1">
         {[
           { id: 'all', label: 'Vše' },
           { id: 'mcdonalds', label: "McDonald's" },
           { id: 'kfc', label: 'KFC' },
+          { id: 'burgerking', label: 'Burger King' },
         ].map((chain) => (
           <button
             key={chain.id}
             onClick={() => setSelectedChain(chain.id as any)}
-            className={`flex-1 py-2.5 rounded-xl text-sm font-semibold transition ${
+            className={`flex-1 min-w-[75px] py-2.5 px-2 rounded-xl text-xs font-semibold whitespace-nowrap transition ${
               selectedChain === chain.id
                 ? 'bg-amber-500 text-slate-950'
                 : 'bg-slate-900 text-slate-400 border border-slate-800'
@@ -91,14 +101,14 @@ export default function Home() {
               key={item.id}
               className="bg-slate-900 border border-slate-800 rounded-xl p-4 flex flex-col gap-2 relative overflow-hidden"
             >
-              <div className="flex justify-between items-start">
+              <div className="flex justify-between items-start gap-2">
                 <div>
                   <span className="text-[10px] font-bold uppercase tracking-wider text-amber-500/80">
-                    {item.chain === 'mcdonalds' ? "McDonald's" : 'KFC'}
+                    {getChainName(item.chain)}
                   </span>
                   <h3 className="font-bold text-base text-white">{item.name}</h3>
                 </div>
-                <div className="text-right">
+                <div className="text-right shrink-0">
                   <span className="text-xs font-black text-amber-400 bg-amber-500/10 px-2 py-1 rounded-md border border-amber-500/20">
                     {ratio} g P / 100 kcal
                   </span>
