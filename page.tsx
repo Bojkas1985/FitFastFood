@@ -1,0 +1,166 @@
+'use client';
+
+import React, { useState, useMemo } from 'react';
+
+interface FoodItem {
+  id: string;
+  chain: 'mcdonalds' | 'kfc';
+  name: string;
+  calories: number;
+  protein: number;
+  carbs: number;
+  fat: number;
+  tip?: string;
+}
+
+const FOOD_DATA: FoodItem[] = [
+  // McDonald's
+  { id: '1', chain: 'mcdonalds', name: 'Double Cheeseburger', calories: 440, protein: 26, carbs: 35, fat: 23, tip: 'Skvělý poměr cena/protein' },
+  { id: '2', chain: 'mcdonalds', name: 'Chicken McNuggets (9ks)', calories: 390, protein: 23, carbs: 28, fat: 20, tip: 'Kombinuj s hořčicí místo majonézy' },
+  { id: '3', chain: 'mcdonalds', name: 'McChicken', calories: 420, protein: 20, carbs: 41, fat: 19, tip: 'Bez majonézy ušetříš ~100 kcal tuku' },
+  { id: '4', chain: 'mcdonalds', name: 'McRoyal', calories: 520, protein: 31, carbs: 37, fat: 27, tip: 'Největší porce hovězího proteinu' },
+  { id: '5', chain: 'mcdonalds', name: 'McWrap Křupavé Kuře', calories: 580, protein: 24, carbs: 54, fat: 29 },
+  
+  // KFC
+  { id: '6', chain: 'kfc', name: 'Kentucky Strips (3ks)', calories: 340, protein: 32, carbs: 18, fat: 15, tip: 'Čisté kuřecí prso, top makra v KFC' },
+  { id: '7', chain: 'kfc', name: 'Zinger', calories: 450, protein: 22, carbs: 42, fat: 21, tip: 'Pikantní klasik' },
+  { id: '8', chain: 'kfc', name: 'Twister Classic', calories: 480, protein: 21, carbs: 49, fat: 22 },
+  { id: '9', chain: 'kfc', name: 'Longer', calories: 310, protein: 14, carbs: 34, fat: 13, tip: 'Rychlá malá svačina do diety' },
+  { id: '10', chain: 'kfc', name: 'Grander', calories: 680, protein: 36, carbs: 56, fat: 34, tip: 'Vysoký protein, ale pozor na kalorie' },
+];
+
+export default function Home() {
+  const [selectedChain, setSelectedChain] = useState<'all' | 'mcdonalds' | 'kfc'>('all');
+  const [sortBy, setSortBy] = useState<'ratio' | 'protein' | 'calories'>('ratio');
+  const [under500Kcal, setUnder500Kcal] = useState<boolean>(false);
+
+  const filteredAndSortedData = useMemo(() => {
+    return FOOD_DATA
+      .filter((item) => {
+        if (selectedChain !== 'all' && item.chain !== selectedChain) return false;
+        if (under500Kcal && item.calories > 500) return false;
+        return true;
+      })
+      .sort((a, b) => {
+        if (sortBy === 'ratio') {
+          const ratioA = (a.protein / a.calories) * 100;
+          const ratioB = (b.protein / b.calories) * 100;
+          return ratioB - ratioA;
+        }
+        if (sortBy === 'protein') return b.protein - a.protein;
+        if (sortBy === 'calories') return a.calories - b.calories;
+        return 0;
+      });
+  }, [selectedChain, sortBy, under500Kcal]);
+
+  return (
+    <main className="min-h-screen bg-slate-950 text-slate-100 p-4 max-w-md mx-auto pb-12">
+      {/* Header */}
+      <header className="py-6 text-center border-b border-slate-800 mb-6">
+        <h1 className="text-3xl font-black tracking-tight text-amber-500">FitFastFood</h1>
+        <p className="text-xs text-slate-400 mt-1">Nejlepší makra ke kiosku v ČR</p>
+      </header>
+
+      {/* Výběr Řetězce */}
+      <div className="flex gap-2 mb-4">
+        {[
+          { id: 'all', label: 'Vše' },
+          { id: 'mcdonalds', label: "McDonald's" },
+          { id: 'kfc', label: 'KFC' },
+        ].map((chain) => (
+          <button
+            key={chain.id}
+            onClick={() => setSelectedChain(chain.id as any)}
+            className={`flex-1 py-2.5 rounded-xl text-sm font-semibold transition ${
+              selectedChain === chain.id
+                ? 'bg-amber-500 text-slate-950'
+                : 'bg-slate-900 text-slate-400 border border-slate-800'
+            }`}
+          >
+            {chain.label}
+          </button>
+        ))}
+      </div>
+
+      {/* Ovládací prvek: Řazení a Filtry */}
+      <div className="space-y-3 mb-6 bg-slate-900 p-3 rounded-xl border border-slate-800">
+        <div className="flex items-center justify-between">
+          <span className="text-xs text-slate-400 font-medium">Řadit podle:</span>
+          <select
+            value={sortBy}
+            onChange={(e) => setSortBy(e.target.value as any)}
+            className="bg-slate-950 text-amber-400 text-xs font-semibold px-3 py-1.5 rounded-lg border border-slate-800 outline-none"
+          >
+            <option value="ratio">Top Poměr (Protein/100 kcal)</option>
+            <option value="protein">Max Bílkoviny (g)</option>
+            <option value="calories">Nejméně Kalorií (kcal)</option>
+          </select>
+        </div>
+
+        <div className="flex items-center justify-between border-t border-slate-800/60 pt-2">
+          <span className="text-xs text-slate-300">Pouze do 500 kcal</span>
+          <input
+            type="checkbox"
+            checked={under500Kcal}
+            onChange={(e) => setUnder500Kcal(e.target.checked)}
+            className="w-4 h-4 accent-amber-500 rounded"
+          />
+        </div>
+      </div>
+
+      {/* Seznam jídel */}
+      <div className="space-y-3">
+        {filteredAndSortedData.map((item) => {
+          const ratio = ((item.protein / item.calories) * 100).toFixed(1);
+          return (
+            <div
+              key={item.id}
+              className="bg-slate-900 border border-slate-800 rounded-xl p-4 flex flex-col gap-2 relative overflow-hidden"
+            >
+              <div className="flex justify-between items-start">
+                <div>
+                  <span className="text-[10px] font-bold uppercase tracking-wider text-amber-500/80">
+                    {item.chain === 'mcdonalds' ? "McDonald's" : 'KFC'}
+                  </span>
+                  <h3 className="font-bold text-base text-white">{item.name}</h3>
+                </div>
+                <div className="text-right">
+                  <span className="text-xs font-black text-amber-400 bg-amber-500/10 px-2 py-1 rounded-md border border-amber-500/20">
+                    {ratio} g P / 100 kcal
+                  </span>
+                </div>
+              </div>
+
+              {/* Makra přehled */}
+              <div className="grid grid-cols-4 gap-1 bg-slate-950 p-2 rounded-lg text-center text-xs mt-1">
+                <div>
+                  <div className="text-slate-500 text-[10px]">Kalorie</div>
+                  <div className="font-semibold text-slate-200">{item.calories} <span className="text-[9px]">kcal</span></div>
+                </div>
+                <div>
+                  <div className="text-slate-500 text-[10px]">Bílkoviny</div>
+                  <div className="font-bold text-emerald-400">{item.protein}g</div>
+                </div>
+                <div>
+                  <div className="text-slate-500 text-[10px]">Sacharidy</div>
+                  <div className="font-semibold text-slate-400">{item.carbs}g</div>
+                </div>
+                <div>
+                  <div className="text-slate-500 text-[10px]">Tuky</div>
+                  <div className="font-semibold text-slate-400">{item.fat}g</div>
+                </div>
+              </div>
+
+              {/* Tip */}
+              {item.tip && (
+                <p className="text-[11px] text-amber-200/70 italic bg-amber-500/5 p-1.5 rounded border border-amber-500/10 mt-1">
+                  💡 {item.tip}
+                </p>
+              )}
+            </div>
+          );
+        })}
+      </div>
+    </main>
+  );
+}
