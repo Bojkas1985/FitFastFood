@@ -1,12 +1,64 @@
 import { FoodItem } from '../types/food';
 
 export const kfcData: FoodItem[] = [
-  { id: 'kfc-1', chain: 'kfc', name: 'Kentucky Strips (3ks)', calories: 336, protein: 32.7, carbs: 18.2, fat: 14.7, tip: 'Nejlepší poměr bílkovin v celé nabídce KFC' },
-  { id: 'kfc-2', chain: 'kfc', name: 'Hot Wings (5ks)', calories: 395, protein: 26.1, carbs: 15.3, fat: 25.4, tip: 'Vyšší podíl tuků kvůli kůži' },
-  { id: 'kfc-3', chain: 'kfc', name: 'Zinger', calories: 452, protein: 22.4, carbs: 42.1, fat: 21.3 },
-  { id: 'kfc-4', chain: 'kfc', name: 'Twister Classic', calories: 478, protein: 20.8, carbs: 48.9, fat: 21.8 },
-  { id: 'kfc-5', chain: 'kfc', name: 'Qurrito Classic', calories: 625, protein: 31.5, carbs: 49.2, fat: 32.8, tip: 'Hodně bílkovin, ale i dost sýra a tuku' },
-  { id: 'kfc-6', chain: 'kfc', name: 'Grander Texas', calories: 685, protein: 36.2, carbs: 56.4, fat: 34.1, tip: 'Vysoká nálož proteinu pro velký hlad' },
-  { id: 'kfc-7', chain: 'kfc', name: 'Longer', calories: 312, protein: 14.1, carbs: 33.8, fat: 13.2, tip: 'Malá lehčí svačina' },
-  { id: 'kfc-8', chain: 'kfc', name: 'Halloumi Burger', calories: 510, protein: 21.3, carbs: 40.5, fat: 29.8 },
+  // --- Kuřecí kousky Kentucky ---
+  { id: 'kfc-drumstick', chain: 'kfc', name: 'Kentucky Nožička (1ks)', calories: 170, protein: 16, carbs: 5, fat: 9.6 },
+  { id: 'kfc-breast', chain: 'kfc', name: 'Kentucky Prsa (1ks)', calories: 236, protein: 25, carbs: 7.8, fat: 12, tip: 'Čistý protein s minimem sacharidů' },
+  { id: 'kfc-rib', chain: 'kfc', name: 'Kentucky Žebra (1ks)', calories: 326, protein: 36, carbs: 10.9, fat: 15 },
+  { id: 'kfc-thigh', chain: 'kfc', name: 'Kentucky Stehno (1ks)', calories: 301, protein: 22, carbs: 9.3, fat: 20 },
+  { id: 'kfc-wing', chain: 'kfc', name: 'Kentucky Křídlo (1ks)', calories: 185, protein: 15, carbs: 6.5, fat: 11.1 },
+
+  // --- Strips, Wings & Bites ---
+  { id: 'kfc-strip', chain: 'kfc', name: 'Hot & Spicy Strip (1ks)', calories: 92, protein: 7, carbs: 3.2, fat: 5.9, tip: 'Poskládej si např. 4ks pro 28g bílkovin' },
+  { id: 'kfc-hotwing', chain: 'kfc', name: 'Hot Wing (1ks)', calories: 114, protein: 7, carbs: 5, fat: 7.4 },
+  { id: 'kfc-bites', chain: 'kfc', name: 'Hot & Spicy Bites (90g)', calories: 291, protein: 17, carbs: 14.2, fat: 18.9 },
+
+  // --- Sendviče & Tortilly ---
+  { id: 'kfc-zinger', chain: 'kfc', name: 'Zinger', calories: 445, protein: 25, carbs: 36.2, fat: 22.1 },
+  { id: 'kfc-double-zinger', chain: 'kfc', name: 'Double Zinger', calories: 590, protein: 41, carbs: 40.8, fat: 28.8, tip: 'Skvělých 41g bílkovin' },
+  { id: 'kfc-zinger-grill', chain: 'kfc', name: 'Zinger Grill', calories: 344, protein: 35, carbs: 20.8, fat: 12.8, tip: 'Grilované maso = méně tuků i kalorií' },
+  { id: 'kfc-grander-texas', chain: 'kfc', name: 'Grander Texas', calories: 807, protein: 33, carbs: 63.9, fat: 45 },
+  { id: 'kfc-grander-cheeser', chain: 'kfc', name: 'Grander Cheeser', calories: 740, protein: 32, carbs: 72, fat: 37 },
+  { id: 'kfc-double-grander-cheeser', chain: 'kfc', name: 'Double Grander Cheeser', calories: 1132, protein: 54, carbs: 92, fat: 62 },
+  { id: 'kfc-gold-grander', chain: 'kfc', name: 'Kentucky Gold Grander', calories: 763, protein: 32, carbs: 71, fat: 41 },
+  { id: 'kfc-longer', chain: 'kfc', name: 'Longer', calories: 309, protein: 15, carbs: 43, fat: 8.1, tip: 'Lehká svačina do 310 kcal' },
+  { id: 'kfc-cheeseburger', chain: 'kfc', name: 'Cheeseburger', calories: 326, protein: 16, carbs: 32.5, fat: 15 },
+  { id: 'kfc-itwist-classic', chain: 'kfc', name: 'iTwist Classic', calories: 350, protein: 11, carbs: 38.3, fat: 18.5 },
+  { id: 'kfc-itwist-grill', chain: 'kfc', name: 'iTwist Grill', calories: 241, protein: 13, carbs: 26.8, fat: 9 },
+  { id: 'kfc-twister-classic', chain: 'kfc', name: 'Twister Classic', calories: 565, protein: 25, carbs: 51.5, fat: 27.1 },
+  { id: 'kfc-twister-grill', chain: 'kfc', name: 'Twister Grill', calories: 409, protein: 28, carbs: 40.5, fat: 14.1, tip: 'Super poměr s grilovaným masem' },
+  { id: 'kfc-qurrito', chain: 'kfc', name: 'Qurrito', calories: 564, protein: 29, carbs: 52.7, fat: 26 },
+  { id: 'kfc-qurrito-grill', chain: 'kfc', name: 'Qurrito Grill', calories: 515, protein: 27, carbs: 48.3, fat: 23.1 },
+  { id: 'kfc-qurrito-cheeser', chain: 'kfc', name: 'Qurrito Cheeser', calories: 792, protein: 32, carbs: 67, fat: 45 },
+  { id: 'kfc-qurrito-grande-cheeser', chain: 'kfc', name: 'Qurrito Grande Cheeser', calories: 1103, protein: 45, carbs: 95, fat: 61 },
+  { id: 'kfc-megapocket', chain: 'kfc', name: 'Megapocket', calories: 715, protein: 29, carbs: 63.1, fat: 37.3 },
+  { id: 'kfc-megapocket-grill', chain: 'kfc', name: 'Mega Pocket Grill', calories: 569, protein: 29, carbs: 56.1, fat: 24.3 },
+  { id: 'kfc-gold-wrapper', chain: 'kfc', name: 'Kentucky Gold Wrapper', calories: 1197, protein: 42, carbs: 91, fat: 77 },
+  { id: 'kfc-wrapper-nachos', chain: 'kfc', name: 'Wrapper Nachos', calories: 1020, protein: 34, carbs: 96, fat: 56 },
+  { id: 'kfc-halloumi-burger', chain: 'kfc', name: 'Halloumi Burger', calories: 703, protein: 30, carbs: 61, fat: 39 },
+  { id: 'kfc-halloumi-twister', chain: 'kfc', name: 'Halloumi Twister', calories: 691, protein: 28, carbs: 49, fat: 44 },
+
+  // --- Snídaně ---
+  { id: 'kfc-snidancove-qurrito', chain: 'kfc', name: 'Snídaňové Qurrito (vejce/slanina)', calories: 548, protein: 31, carbs: 24.2, fat: 35.2 },
+  { id: 'kfc-snidance-twister', chain: 'kfc', name: 'Snídaňový Twister Cheese & Bacon', calories: 622, protein: 29, carbs: 46.6, fat: 36 },
+  { id: 'kfc-snidancovy-talir', chain: 'kfc', name: 'Snídaňový talíř', calories: 538, protein: 31, carbs: 38.5, fat: 29.1 },
+  { id: 'kfc-toast-egg-cheese', chain: 'kfc', name: 'Toast s vejcem a sýrem', calories: 368, protein: 17, carbs: 31.5, fat: 19.5 },
+  { id: 'kfc-bagel-egg-cheese', chain: 'kfc', name: 'Snídaňový Bagel s vejcem a sýrem', calories: 559, protein: 25, carbs: 60.9, fat: 23.1 },
+  { id: 'kfc-double-toast', chain: 'kfc', name: 'Dvojitý toast (vejce/sýr/slanina)', calories: 738, protein: 36, carbs: 54, fat: 42 },
+
+  // --- Saláty ---
+  { id: 'kfc-caesar-grill', chain: 'kfc', name: 'Salát Caesar (grilovaný filet)', calories: 102, protein: 20, carbs: 2.5, fat: 0.5, tip: 'Absolutní dietní vítěz (20g proteinu na 102 kcal)' },
+  { id: 'kfc-salat-piccante', chain: 'kfc', name: 'Salát Piccante', calories: 256, protein: 21, carbs: 9.9, fat: 13.8 },
+  { id: 'kfc-coleslaw', chain: 'kfc', name: 'Salát Coleslaw', calories: 141, protein: 1, carbs: 13.3, fat: 9.7 },
+
+  // --- Přílohy ---
+  { id: 'kfc-bramborova-kase', chain: 'kfc', name: 'Bramborová kaše s omáčkou', calories: 117, protein: 3, carbs: 22.2, fat: 1.3 },
+  { id: 'kfc-hranolky-male', chain: 'kfc', name: 'Hranolky malé', calories: 176, protein: 3, carbs: 25.9, fat: 7 },
+  { id: 'kfc-hranolky-velke', chain: 'kfc', name: 'Hranolky velké', calories: 265, protein: 4, carbs: 38.9, fat: 10.5 },
+  { id: 'kfc-hranolky-kyblik', chain: 'kfc', name: 'Hranolky kyblík', calories: 605, protein: 9, carbs: 88.8, fat: 24 },
+  { id: 'kfc-lupinky-male', chain: 'kfc', name: 'Bramborové lupínky malé', calories: 292, protein: 3, carbs: 28.9, fat: 17.5 },
+  { id: 'kfc-lupinky-velke', chain: 'kfc', name: 'Bramborové lupínky velké', calories: 584, protein: 7, carbs: 57.7, fat: 34.9 },
+  { id: 'kfc-rosti', chain: 'kfc', name: 'Rosti', calories: 238, protein: 3, carbs: 30.5, fat: 11.6 },
+  { id: 'kfc-chilli-nuggets', chain: 'kfc', name: 'Chilli Cheese Nuggets', calories: 318, protein: 8, carbs: 28.5, fat: 19.1 },
+  { id: 'kfc-cibulose-krouzky', chain: 'kfc', name: 'Cibulové kroužky', calories: 207, protein: 2, carbs: 29.1, fat: 10.2 }
 ];
