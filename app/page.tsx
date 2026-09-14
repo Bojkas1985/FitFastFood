@@ -1,33 +1,7 @@
 'use client';
 
 import React, { useState, useMemo } from 'react';
-
-interface FoodItem {
-  id: string;
-  chain: 'mcdonalds' | 'kfc';
-  name: string;
-  calories: number;
-  protein: number;
-  carbs: number;
-  fat: number;
-  tip?: string;
-}
-
-const FOOD_DATA: FoodItem[] = [
-  // McDonald's
-  { id: '1', chain: 'mcdonalds', name: 'Double Cheeseburger', calories: 440, protein: 26, carbs: 35, fat: 23, tip: 'Skvělý poměr cena/protein' },
-  { id: '2', chain: 'mcdonalds', name: 'Chicken McNuggets (9ks)', calories: 390, protein: 23, carbs: 28, fat: 20, tip: 'Kombinuj s hořčicí místo majonézy' },
-  { id: '3', chain: 'mcdonalds', name: 'McChicken', calories: 420, protein: 20, carbs: 41, fat: 19, tip: 'Bez majonézy ušetříš ~100 kcal tuku' },
-  { id: '4', chain: 'mcdonalds', name: 'McRoyal', calories: 520, protein: 31, carbs: 37, fat: 27, tip: 'Největší porce hovězího proteinu' },
-  { id: '5', chain: 'mcdonalds', name: 'McWrap Křupavé Kuře', calories: 580, protein: 24, carbs: 54, fat: 29 },
-  
-  // KFC
-  { id: '6', chain: 'kfc', name: 'Kentucky Strips (3ks)', calories: 340, protein: 32, carbs: 18, fat: 15, tip: 'Čisté kuřecí prso, top makra v KFC' },
-  { id: '7', chain: 'kfc', name: 'Zinger', calories: 450, protein: 22, carbs: 42, fat: 21, tip: 'Pikantní klasik' },
-  { id: '8', chain: 'kfc', name: 'Twister Classic', calories: 480, protein: 21, carbs: 49, fat: 22 },
-  { id: '9', chain: 'kfc', name: 'Longer', calories: 310, protein: 14, carbs: 34, fat: 13, tip: 'Rychlá malá svačina do diety' },
-  { id: '10', chain: 'kfc', name: 'Grander', calories: 680, protein: 36, carbs: 56, fat: 34, tip: 'Vysoký protein, ale pozor na kalorie' },
-];
+import { FOOD_DATA } from '../data';
 
 export default function Home() {
   const [selectedChain, setSelectedChain] = useState<'all' | 'mcdonalds' | 'kfc'>('all');
