@@ -4,15 +4,17 @@ import React, { useState, useMemo } from 'react';
 import { FOOD_DATA } from '../data';
 
 export default function Home() {
-  const [selectedChain, setSelectedChain] = useState<'all' | 'mcdonalds' | 'kfc' | 'burgerking' | 'subway'>('all');
+  const [selectedChain, setSelectedChain] = useState<'all' | 'mcdonalds' | 'kfc' | 'burgerking' | 'subway' | 'generic'>('all');
   const [sortBy, setSortBy] = useState<'ratio' | 'protein' | 'calories'>('ratio');
   const [under500Kcal, setUnder500Kcal] = useState<boolean>(false);
+  const [onlyVeggie, setOnlyVeggie] = useState<boolean>(false);
 
   const filteredAndSortedData = useMemo(() => {
     return FOOD_DATA
       .filter((item) => {
         if (selectedChain !== 'all' && item.chain !== selectedChain) return false;
         if (under500Kcal && item.calories > 500) return false;
+        if (onlyVeggie && !item.isVegetarian) return false;
         return true;
       })
       .sort((a, b) => {
@@ -25,7 +27,7 @@ export default function Home() {
         if (sortBy === 'calories') return a.calories - b.calories;
         return 0;
       });
-  }, [selectedChain, sortBy, under500Kcal]);
+  }, [selectedChain, sortBy, under500Kcal, onlyVeggie]);
 
   const getChainName = (chain: string) => {
     switch (chain) {
@@ -33,6 +35,7 @@ export default function Home() {
       case 'kfc': return 'KFC';
       case 'burgerking': return 'Burger King';
       case 'subway': return 'Subway';
+      case 'generic': return 'Kebab / Stánek / Bistro';
       default: return chain;
     }
   };
@@ -53,6 +56,7 @@ export default function Home() {
           { id: 'kfc', label: 'KFC' },
           { id: 'burgerking', label: 'Burger King' },
           { id: 'subway', label: 'Subway' },
+          { id: 'generic', label: 'Kebab & Stánky' },
         ].map((chain) => (
           <button
             key={chain.id}
@@ -92,6 +96,16 @@ export default function Home() {
             className="w-4 h-4 accent-amber-500 rounded"
           />
         </div>
+
+        <div className="flex items-center justify-between border-t border-slate-800/60 pt-2">
+          <span className="text-xs text-slate-300">Pouze vegetariánské 🌱</span>
+          <input
+            type="checkbox"
+            checked={onlyVeggie}
+            onChange={(e) => setOnlyVeggie(e.target.checked)}
+            className="w-4 h-4 accent-emerald-500 rounded"
+          />
+        </div>
       </div>
 
       {/* Seznam jídel */}
@@ -105,9 +119,16 @@ export default function Home() {
             >
               <div className="flex justify-between items-start gap-2">
                 <div>
-                  <span className="text-[10px] font-bold uppercase tracking-wider text-amber-500/80">
-                    {getChainName(item.chain)}
-                  </span>
+                  <div className="flex items-center gap-1.5">
+                    <span className="text-[10px] font-bold uppercase tracking-wider text-amber-500/80">
+                      {getChainName(item.chain)}
+                    </span>
+                    {item.isVegetarian && (
+                      <span className="text-[10px] bg-emerald-500/10 text-emerald-400 px-1.5 py-0.5 rounded border border-emerald-500/20 font-bold">
+                        🌱 Veggie
+                      </span>
+                    )}
+                  </div>
                   <h3 className="font-bold text-base text-white">{item.name}</h3>
                 </div>
                 <div className="text-right shrink-0">
