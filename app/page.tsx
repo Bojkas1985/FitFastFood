@@ -35,7 +35,7 @@ export default function Home() {
       case 'kfc': return 'KFC';
       case 'burgerking': return 'Burger King';
       case 'subway': return 'Subway';
-      case 'generic': return 'Kebab / Stánek / Bistro';
+      case 'generic': return 'Kebab & Stánky';
       default: return chain;
     }
   };
@@ -48,22 +48,22 @@ export default function Home() {
         <p className="text-xs text-slate-400 mt-1">Nejlepší makra ke kiosku v ČR</p>
       </header>
 
-      {/* Výběr Řetězce */}
-      <div className="flex gap-1.5 mb-4 overflow-x-auto pb-1">
+      {/* Výběr Řetězce - Mřížka 3x2 místo scrollu */}
+      <div className="grid grid-cols-3 gap-2 mb-4">
         {[
           { id: 'all', label: 'Vše' },
           { id: 'mcdonalds', label: "McDonald's" },
           { id: 'kfc', label: 'KFC' },
           { id: 'burgerking', label: 'Burger King' },
           { id: 'subway', label: 'Subway' },
-          { id: 'generic', label: 'Kebab & Stánky' },
+          { id: 'generic', label: 'Stánky/Kebab' },
         ].map((chain) => (
           <button
             key={chain.id}
             onClick={() => setSelectedChain(chain.id as any)}
-            className={`flex-1 min-w-[75px] py-2.5 px-2 rounded-xl text-xs font-semibold whitespace-nowrap transition ${
+            className={`py-2.5 px-1 rounded-xl text-xs font-semibold text-center transition ${
               selectedChain === chain.id
-                ? 'bg-amber-500 text-slate-950'
+                ? 'bg-amber-500 text-slate-950 font-bold'
                 : 'bg-slate-900 text-slate-400 border border-slate-800'
             }`}
           >
