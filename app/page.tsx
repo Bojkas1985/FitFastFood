@@ -36,7 +36,7 @@ export default function Home() {
       case 'burgerking': return 'Burger King';
       case 'subway': return 'Subway';
       case 'popeyes': return 'Popeyes';
-      case 'generic': return 'Kebab & Stánky';
+      case 'generic': return 'Stánky / Kebab';
       default: return chain;
     }
   };
@@ -49,8 +49,8 @@ export default function Home() {
         <p className="text-xs text-slate-400 mt-1">Nejlepší makra ke kiosku v ČR</p>
       </header>
 
-      {/* Výběr Řetězce */}
-      <div className="grid grid-cols-3 gap-2 mb-4">
+      {/* Výběr Řetězce - Všechna tlačítka viditelná */}
+      <div className="flex flex-wrap gap-1.5 mb-4">
         {[
           { id: 'all', label: 'Vše' },
           { id: 'mcdonalds', label: "McDonald's" },
@@ -58,15 +58,15 @@ export default function Home() {
           { id: 'burgerking', label: 'Burger King' },
           { id: 'subway', label: 'Subway' },
           { id: 'popeyes', label: 'Popeyes' },
-          { id: 'generic', label: 'Stánky/Kebab' },
+          { id: 'generic', label: 'Stánky / Kebab' },
         ].map((chain) => (
           <button
             key={chain.id}
             onClick={() => setSelectedChain(chain.id as any)}
-            className={`py-2.5 px-1 rounded-xl text-xs font-semibold text-center transition ${
+            className={`flex-1 min-w-[30%] py-2.5 px-2 rounded-xl text-xs font-bold text-center transition ${
               selectedChain === chain.id
-                ? 'bg-amber-500 text-slate-950 font-bold'
-                : 'bg-slate-900 text-slate-400 border border-slate-800'
+                ? 'bg-amber-500 text-slate-950 shadow-lg shadow-amber-500/20'
+                : 'bg-slate-900 text-slate-300 border border-slate-800'
             }`}
           >
             {chain.label}
@@ -119,26 +119,25 @@ export default function Home() {
               key={item.id}
               className="bg-slate-900 border border-slate-800 rounded-xl p-4 flex flex-col gap-2 relative overflow-hidden"
             >
-              <div className="flex justify-between items-start gap-2">
-                <div>
-                  <div className="flex items-center gap-1.5">
-                    <span className="text-[10px] font-bold uppercase tracking-wider text-amber-500/80">
-                      {getChainName(item.chain)}
-                    </span>
-                    {item.isVegetarian && (
-                      <span className="text-[10px] bg-emerald-500/10 text-emerald-400 px-1.5 py-0.5 rounded border border-emerald-500/20 font-bold">
-                        🌱 Veggie
-                      </span>
-                    )}
-                  </div>
-                  <h3 className="font-bold text-base text-white">{item.name}</h3>
-                </div>
-                <div className="text-right shrink-0">
-                  <span className="text-xs font-black text-amber-400 bg-amber-500/10 px-2 py-1 rounded-md border border-amber-500/20">
-                    {ratio} g P / 100 kcal
+              {/* Zvýrazněný štítek restaurace */}
+              <div className="flex items-center justify-between gap-2">
+                <div className="flex items-center gap-1.5 flex-wrap">
+                  <span className="bg-amber-500/20 text-amber-300 text-[11px] font-black px-2.5 py-0.5 rounded-md border border-amber-500/30 uppercase tracking-wide">
+                    {getChainName(item.chain)}
                   </span>
+                  {item.isVegetarian && (
+                    <span className="bg-emerald-500/20 text-emerald-400 text-[11px] font-bold px-2 py-0.5 rounded-md border border-emerald-500/30">
+                      🌱 Veggie
+                    </span>
+                  )}
                 </div>
+                <span className="text-xs font-black text-amber-400 bg-amber-500/10 px-2 py-1 rounded-md border border-amber-500/20 shrink-0">
+                  {ratio} g P / 100 kcal
+                </span>
               </div>
+
+              {/* Název jídla */}
+              <h3 className="font-bold text-base text-white mt-0.5">{item.name}</h3>
 
               {/* Makra přehled */}
               <div className="grid grid-cols-4 gap-1 bg-slate-950 p-2 rounded-lg text-center text-xs mt-1">
