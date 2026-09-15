@@ -4,7 +4,7 @@ import React, { useState, useMemo } from 'react';
 import { FOOD_DATA } from '../data';
 
 export default function Home() {
-  const [selectedChain, setSelectedChain] = useState<'all' | 'mcdonalds' | 'kfc' | 'burgerking' | 'subway' | 'popeyes' | 'generic'>('all');
+  const [selectedChain, setSelectedChain] = useState<'all' | 'mcdonalds' | 'kfc' | 'burgerking' | 'subway' | 'popeyes' | 'bb' | 'generic'>('all');
   const [sortBy, setSortBy] = useState<'ratio' | 'protein' | 'calories'>('ratio');
   const [under500Kcal, setUnder500Kcal] = useState<boolean>(false);
   const [onlyVeggie, setOnlyVeggie] = useState<boolean>(false);
@@ -36,6 +36,7 @@ export default function Home() {
       case 'burgerking': return 'Burger King';
       case 'subway': return 'Subway';
       case 'popeyes': return 'Popeyes';
+      case 'bb': return 'Bageterie Boulevard';
       case 'generic': return 'Stánky / Kebab';
       default: return chain;
     }
@@ -49,7 +50,7 @@ export default function Home() {
         <p className="text-xs text-slate-400 mt-1">Nejlepší makra ke kiosku v ČR</p>
       </header>
 
-      {/* Výběr Řetězce - Všechna tlačítka viditelná */}
+      {/* Výběr Řetězce */}
       <div className="flex flex-wrap gap-1.5 mb-4">
         {[
           { id: 'all', label: 'Vše' },
@@ -58,12 +59,13 @@ export default function Home() {
           { id: 'burgerking', label: 'Burger King' },
           { id: 'subway', label: 'Subway' },
           { id: 'popeyes', label: 'Popeyes' },
+          { id: 'bb', label: 'Bageterie B.' },
           { id: 'generic', label: 'Stánky / Kebab' },
         ].map((chain) => (
           <button
             key={chain.id}
             onClick={() => setSelectedChain(chain.id as any)}
-            className={`flex-1 min-w-[30%] py-2.5 px-2 rounded-xl text-xs font-bold text-center transition ${
+            className={`flex-1 min-w-[23%] py-2 px-1 rounded-xl text-[11px] font-bold text-center transition ${
               selectedChain === chain.id
                 ? 'bg-amber-500 text-slate-950 shadow-lg shadow-amber-500/20'
                 : 'bg-slate-900 text-slate-300 border border-slate-800'
