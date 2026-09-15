@@ -55,10 +55,12 @@ export default function Home() {
 
   return (
     <main className="min-h-screen bg-black text-white p-4 max-w-md mx-auto pb-16 font-sans">
-      {/* Hlavní Hlavička */}
+      {/* Hlavní Hlavička s FitFastFood */}
       <header className="flex items-center justify-between py-4 mb-4">
         <div>
-          <h1 className="text-2xl font-black tracking-tight text-white">Fastfood Výběr</h1>
+          <h1 className="text-3xl font-black tracking-tight text-white">
+            <span className="text-amber-500">Fit</span>FastFood
+          </h1>
           <p className="text-xs text-zinc-400 mt-0.5 font-medium">
             ČR • {selectedChain === 'all' ? 'Všechny řetězce' : getChainName(selectedChain)}
           </p>
@@ -68,8 +70,8 @@ export default function Home() {
         </div>
       </header>
 
-      {/* Přepínač Řetězců (Pill Tabs) */}
-      <div className="bg-zinc-900/90 p-1 rounded-2xl border border-zinc-800/80 flex overflow-x-auto gap-1 mb-4 no-scrollbar">
+      {/* Přepínač Řetězců - Mřížka 4x2 bez scrollu */}
+      <div className="grid grid-cols-4 gap-1.5 mb-4">
         {[
           { id: 'all', label: 'Vše' },
           { id: 'mcdonalds', label: "McDonald's" },
@@ -83,10 +85,10 @@ export default function Home() {
           <button
             key={chain.id}
             onClick={() => setSelectedChain(chain.id as any)}
-            className={`py-2.5 px-4 rounded-xl text-xs font-bold whitespace-nowrap transition-all duration-150 ${
+            className={`py-2 px-1 rounded-xl text-[11px] font-bold text-center transition-all ${
               selectedChain === chain.id
                 ? 'bg-amber-500 text-black shadow-md font-extrabold'
-                : 'text-zinc-400 hover:text-white'
+                : 'bg-zinc-900 text-zinc-400 border border-zinc-800/80 hover:text-white'
             }`}
           >
             {chain.label}
@@ -94,11 +96,11 @@ export default function Home() {
         ))}
       </div>
 
-      {/* Rychlé Filtry & Řazení */}
-      <div className="flex items-center gap-2 mb-4 overflow-x-auto pb-1 no-scrollbar text-xs">
+      {/* Rychlé Filtry & Řazení - Flex wrap bez scrollbaru */}
+      <div className="flex flex-wrap items-center gap-2 mb-4 text-xs">
         <button
           onClick={() => setUnder500Kcal(!under500Kcal)}
-          className={`px-3.5 py-1.5 rounded-full border transition font-medium flex items-center gap-1.5 whitespace-nowrap ${
+          className={`px-3 py-1.5 rounded-full border transition font-medium flex items-center gap-1.5 ${
             under500Kcal
               ? 'bg-amber-500/20 border-amber-500 text-amber-400 font-bold'
               : 'bg-zinc-900 border-zinc-800 text-zinc-300'
@@ -109,7 +111,7 @@ export default function Home() {
 
         <button
           onClick={() => setOnlyVeggie(!onlyVeggie)}
-          className={`px-3.5 py-1.5 rounded-full border transition font-medium flex items-center gap-1.5 whitespace-nowrap ${
+          className={`px-3 py-1.5 rounded-full border transition font-medium flex items-center gap-1.5 ${
             onlyVeggie
               ? 'bg-emerald-500/20 border-emerald-500 text-emerald-400 font-bold'
               : 'bg-zinc-900 border-zinc-800 text-zinc-300'
@@ -121,7 +123,7 @@ export default function Home() {
         <select
           value={sortBy}
           onChange={(e) => setSortBy(e.target.value as any)}
-          className="bg-zinc-900 border border-zinc-800 text-zinc-300 px-3.5 py-1.5 rounded-full outline-none font-medium whitespace-nowrap appearance-none cursor-pointer"
+          className="bg-zinc-900 border border-zinc-800 text-zinc-300 px-3 py-1.5 rounded-full outline-none font-medium appearance-none cursor-pointer"
         >
           <option value="ratio">⚡ Protein/kcal</option>
           <option value="protein">💪 Max Bílkoviny</option>
@@ -129,8 +131,8 @@ export default function Home() {
         </select>
       </div>
 
-      {/* Kategorie položek */}
-      <div className="flex gap-1.5 mb-5 overflow-x-auto no-scrollbar">
+      {/* Kategorie položek - Zalamování (flex-wrap) bez scrollu */}
+      <div className="flex flex-wrap gap-1.5 mb-5">
         {[
           { id: 'all', label: 'Vše' },
           { id: 'burgers', label: 'Burgery' },
@@ -142,7 +144,7 @@ export default function Home() {
           <button
             key={cat.id}
             onClick={() => setSelectedCategory(cat.id)}
-            className={`py-1.5 px-3.5 rounded-full text-xs font-semibold whitespace-nowrap transition ${
+            className={`py-1.5 px-3 rounded-full text-xs font-semibold transition ${
               selectedCategory === cat.id
                 ? 'bg-amber-500 text-black font-bold'
                 : 'bg-zinc-900 text-zinc-400 border border-zinc-800/80'
