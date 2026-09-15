@@ -4,7 +4,7 @@ import React, { useState, useMemo } from 'react';
 import { FOOD_DATA } from '../data';
 
 export default function Home() {
-  const [selectedChain, setSelectedChain] = useState<'all' | 'mcdonalds' | 'kfc' | 'burgerking' | 'subway' | 'generic'>('all');
+  const [selectedChain, setSelectedChain] = useState<'all' | 'mcdonalds' | 'kfc' | 'burgerking' | 'subway' | 'popeyes' | 'generic'>('all');
   const [sortBy, setSortBy] = useState<'ratio' | 'protein' | 'calories'>('ratio');
   const [under500Kcal, setUnder500Kcal] = useState<boolean>(false);
   const [onlyVeggie, setOnlyVeggie] = useState<boolean>(false);
@@ -35,6 +35,7 @@ export default function Home() {
       case 'kfc': return 'KFC';
       case 'burgerking': return 'Burger King';
       case 'subway': return 'Subway';
+      case 'popeyes': return 'Popeyes';
       case 'generic': return 'Kebab & Stánky';
       default: return chain;
     }
@@ -48,7 +49,7 @@ export default function Home() {
         <p className="text-xs text-slate-400 mt-1">Nejlepší makra ke kiosku v ČR</p>
       </header>
 
-      {/* Výběr Řetězce - Mřížka 3x2 místo scrollu */}
+      {/* Výběr Řetězce */}
       <div className="grid grid-cols-3 gap-2 mb-4">
         {[
           { id: 'all', label: 'Vše' },
@@ -56,6 +57,7 @@ export default function Home() {
           { id: 'kfc', label: 'KFC' },
           { id: 'burgerking', label: 'Burger King' },
           { id: 'subway', label: 'Subway' },
+          { id: 'popeyes', label: 'Popeyes' },
           { id: 'generic', label: 'Stánky/Kebab' },
         ].map((chain) => (
           <button
