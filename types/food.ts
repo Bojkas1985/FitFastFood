@@ -1,10 +1,11 @@
 export interface FoodItem {
   id: string;
-  chain: 'mcdonalds' | 'kfc' | 'burgerking' | 'subway' | 'popeyes';
+  chain: 'mcdonalds' | 'kfc' | 'burgerking' | 'subway' | 'generic';
   name: string;
   calories: number;
   protein: number;
   carbs: number;
   fat: number;
   tip?: string;
+  isVegetarian?: boolean;
 }
