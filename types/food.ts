@@ -1,6 +1,6 @@
 export interface FoodItem {
   id: string;
-  chain: 'mcdonalds' | 'kfc' | 'burgerking' | 'subway' | 'popeyes' | 'generic';
+  chain: 'mcdonalds' | 'kfc' | 'burgerking' | 'subway' | 'popeyes' | 'bb' | 'generic';
   name: string;
   calories: number;
   protein: number;
